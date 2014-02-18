@@ -30,7 +30,7 @@ public partial class Create : System.Web.UI.Page
     protected void Btregister_Click(object sender, EventArgs e)
     {
         string dob = Ddldate.SelectedItem.Text + "/" + Ddlmnth.SelectedItem.Text + "/" + Ddlyr.SelectedItem.Text;
-        string str = "insert into User values('" + TxtbxFirst.Text + "','" + TxtBxLast.Text + "','" + TextBxUsername.Text + "','" + TxtEid.Text + "','" + TxtBxpswd.Text + "','" + dob + "')";
+        string str = "insert into UserReg values('" + TxtbxFirst.Text + "','" + TxtBxLast.Text + "','" + TextBxUsername.Text + "','" + TxtEid.Text + "','" + TxtBxpswd.Text + "','" + dob + "')";
         SqlCommand cmd = new SqlCommand(str, con);
         con.Open();
         cmd.ExecuteNonQuery();

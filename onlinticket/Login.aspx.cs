@@ -17,7 +17,7 @@ public partial class Login : System.Web.UI.Page
     SqlDataReader rd;
     
     SqlConnection con = new SqlConnection(@"server=.\;database=onlineticket;uid=sa;pwd=");
-    SqlConnection con1 = new SqlConnection(@"server=.\;database=onlineticket;uid=sa;pwd=");
+    SqlConnection con1= new SqlConnection(@"server=.\;database=onlineticket;uid=sa;pwd=");
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -40,29 +40,26 @@ protected void  Btnsign_Click(object sender, EventArgs e)
 
      SqlCommand cmd = new SqlCommand(str, con);
         con.Open();
-      //cmd.ExecuteNonQuery();
         rd = cmd.ExecuteReader();
         if (rd.Read())
         {
-
             int count = Convert.ToInt32(rd[0]);
             if (count == 1)
-
-
             {
                 Session["uid"] = txtbxusr.Text;
                 string login_dt = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-                string log = "insert into UserDisp(Eid,loginTime)values('" + txtbxusr.Text + "','" + login_dt + "')";
-               // String str = "select count(Username )from UserLogin where Username='" + txtbxusr.Text + "'and Password='" + Txtbxpswd.Text + "'";
-                
-                Response.Redirect("Profile.aspx");
+                Response.Write(login_dt);
+                string logout_dt = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+                Response.Write(logout_dt);
+                string log = "insert into UserDisp(Eid,LoginTime,LogoutTime) values('" + txtbxusr.Text + "','" + login_dt + "','"+logout_dt +"')";
 
-                SqlCommand cmd1 = new SqlCommand(log, con1);
+               // String str = "select count(Username )from UserLogin where Username='" + txtbxusr.Text + "'and Password='" + Txtbxpswd.Text + "'";
+                SqlCommand cmd1 = new SqlCommand(log,con1);
                 con1.Open();
                 cmd1.ExecuteNonQuery();
                 con1.Close();
-
-
+                Response.Redirect("UserHome.aspx");
+                
             }
             else
             {
